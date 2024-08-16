@@ -1,20 +1,28 @@
 var p, pRun, pJump, pStand;
-var brick, brick2, brick3, brick4, brick5, brickI;
+var brick, brick2, brick3, brick4, brick5, brickI, brickI2;
 var jump;
+var win;
+var tubeI;
 var edges;
 var button, bI;
 var message, mI;
 var playerState = "static";
-var gamestate = 4;
+var gamestate = 5;
 
 function preload() {
   pAnimation = loadAnimation("marioMove.png", "mario.png");
   pJump = loadAnimation("marioJump.png");
   pStand = loadAnimation("mario.png");
 
+  win = loadSound("win.mp3")
+
   jump = loadSound("jump.mp3")
 
-  brickI = loadImage("wall.png");
+  tubeI = loadAnimation("tube.png")
+
+  brickI = loadAnimation("wall.png");
+
+  brickI2 = loadImage("wall.png")
 
   bI = loadImage("button.png");
 
@@ -47,7 +55,28 @@ function setup() {
   }
   message.addImage(mI);
 
-  createBricks();
+  brick = createSprite(60, height - 400)
+  brick2 = createSprite(60, height - 400)
+  brick3 = createSprite(60, height - 400)
+  brick4 = createSprite(60, height - 400)
+  brick5 = createSprite(60, height - 400)
+  brick.addAnimation("regular", brickI)
+  brick.addAnimation("tube", tubeI)
+  brick.changeAnimation("regular")
+  brick2.addImage(brickI2)
+  brick3.addImage(brickI2)
+  brick4.addImage(brickI2)
+  brick5.addImage(brickI2)
+  brick.visible = false
+  brick2.visible = false
+  brick3.visible = false
+  brick4.visible = false
+  brick5.visible = false
+  brick.scale = 0.45
+  brick2.scale = 0.45
+  brick3.scale = 0.45
+  brick4.scale = 0.45
+  brick5.scale = 0.45
 }
 
 function draw() {
@@ -188,6 +217,7 @@ function draw() {
       p.y = height - 67;
       p.x = width / 20;
       gamestate =6;
+      win.play()
     }
   }
   if (gamestate == 6) {
@@ -196,24 +226,24 @@ function draw() {
       p.x = width / 20;
       gamestate =7;
     }
+    brick.changeAnimation("tube")
+    
+
+    if (p.isTouching(brick)) {
+      textSize(100)
+      
+      text("You Win!", width / 2, height / 2)
+    }
 
     brick.visible = true;
-    brick2.visible = true;
-    brick3.visible = true;
-    brick4.visible = true;
-    brick5.visible = true;
+    brick2.destroy()
+    brick3.destroy()
+    brick4.destroy()
+    brick5.destroy()
 
-    brick.x = height / 2 - 0;
-    brick2.x = height / 2 - 0;
-    brick3.x = height / 2 - 0;
-    brick4.x = height / 2 - 140;
-    brick5.x = height - 200;
+    brick.x = height / 2;
 
     brick.y = height - 50;
-    brick2.y = height - 150;
-    brick3.y = height - 250;
-    brick4.y = height - 50;
-    brick5.y = height / 2;
   }
   c();
   move();
