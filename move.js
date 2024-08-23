@@ -15,6 +15,7 @@ function move() {
 
   if (keyDown("up") && (p.velocityY === 0 || p.velocityY > 0)) {
     p.changeAnimation("jump");
+    jump.setVolume(0.3)
     jump.play()
     p.velocityY = -12;
   }
