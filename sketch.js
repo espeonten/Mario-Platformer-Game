@@ -2,6 +2,7 @@ var p, pRun, pJump, pStand;
 var brick, brick2, brick3, brick4, brick5, brickI, brickI2;
 var jump;
 var win;
+var disableMove = false;
 var tubeI;
 var edges;
 var button, bI;
@@ -232,7 +233,7 @@ function draw() {
 
     if (p.isTouching(brick)) {
       textSize(100)
-      
+      disableMove = true
       text("You Win!", width / 2, height / 2)
     }
 
