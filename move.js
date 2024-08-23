@@ -1,19 +1,19 @@
 function move() {
-  if (keyDown("right")) {
+  if (keyDown("right") && disableMove == false) {
     p.changeAnimation("run");
     p.x += 5;
   } else if (keyWentUp("right")) {
     p.changeAnimation("stand");
   }
 
-  if (keyDown("left")) {
+  if (keyDown("left") && disableMove == false) {
     p.changeAnimation("run");
     p.x -= 5;
   } else if (keyWentUp("left")) {
     p.changeAnimation("stand");
   }
 
-  if (keyDown("up") && (p.velocityY === 0 || p.velocityY > 0)) {
+  if (keyDown("up") && (p.velocityY === 0 || p.velocityY > 0) && disableMove == false) {
     p.changeAnimation("jump");
     jump.setVolume(0.3)
     jump.play()
