@@ -217,6 +217,7 @@ function draw() {
       p.y = height - 67;
       p.x = width / 20;
       gamestate =6;
+      win.setVolume(0.3)
       win.play()
     }
   }
