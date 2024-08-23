@@ -8,7 +8,7 @@ var edges;
 var button, bI;
 var message, mI;
 var playerState = "static";
-var gamestate = 5;
+var gamestate = 1;
 
 function preload() {
   pAnimation = loadAnimation("marioMove.png", "mario.png");
@@ -93,15 +93,13 @@ function draw() {
   }
 
   if (gamestate == 1) {
+    p.collide(edges[1])
     if (mousePressedOver(button)) {
       gamestate =2;
-      button.destroy();
-      message.destroy();
-    }
-    if (p.x > width + 10) {
-      gamestate += 1;
       p.y = height - 67;
       p.x = width / 20;
+      button.destroy();
+      message.destroy();
     }
   }
   
@@ -109,7 +107,7 @@ function draw() {
     if (p.x > width + 10) {
       gamestate =3;
       p.y = height - 67;
-      p.x = width / 4;
+      p.x = width / 20;
     }
 
     brick.visible = true;
@@ -234,9 +232,11 @@ function draw() {
     if (p.isTouching(brick)) {
       textSize(100)
       disableMove = true
+    }
+    if (disableMove == true) {
+      textSize(50)
       text("You Win!", width / 2, height / 2)
     }
-
     brick.visible = true;
     brick2.destroy()
     brick3.destroy()
